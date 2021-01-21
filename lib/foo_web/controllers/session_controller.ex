@@ -9,19 +9,23 @@ defmodule FooWeb.SessionController do
 
   def create(conn, %{"user" => %{"email" => email, "password" => password}}) do
     case Accounts.authenticate_by_email_password(email, password) do
-#     authorized user "WELCOME"
       {:ok, user} ->
         conn
         |> put_flash(:info, "Welcome back!")
         |> put_session(:user_id, user.id)
         |> configure_session(renew: true)
         |> redirect(to: "/")
-#        check your email/password and redirect
       {:error, unauthorized} ->
         conn
         |> put_flash(:error, "Bad email/password")
         |> redirect(to: session_path(conn, :new))
     end
+  end
+
+  def delete(conn, _) do
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: "/")
   end
 
 end

@@ -29,6 +29,14 @@ defmodule FooWeb.Router do
   #   pipe_through :api
   # end
 
+  defp authenticate_user(conn, _) do
+    case get_session(conn, :user_id) do
+      nil ->
+        conn
+        |> Phoenix
+    end
+  end
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
