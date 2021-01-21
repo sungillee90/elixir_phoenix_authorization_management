@@ -33,7 +33,11 @@ defmodule FooWeb.Router do
     case get_session(conn, :user_id) do
       nil ->
         conn
-        |> Phoenix
+        |> Phoenix.Controller.put_flash(:error, "Login Required")
+        |> Phoenix.Controller.redirect(to: "/")
+        |> halt()
+      user_id ->
+        assign(conn, :current_user, Foo.Accounts.get_user!(user_id))
     end
   end
 
