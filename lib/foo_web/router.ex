@@ -24,6 +24,12 @@ defmodule FooWeb.Router do
 
   end
 
+  scope "/cms", FooWeb.CMS, as: :cms do
+    pipe_through :brower
+
+    resources "/pages", PageController
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", FooWeb do
   #   pipe_through :api
