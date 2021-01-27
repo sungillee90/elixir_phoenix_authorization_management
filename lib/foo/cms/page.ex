@@ -13,7 +13,7 @@ defmodule Foo.CMS.Page do
   @doc false
   def changeset(page, attrs) do
     page
-    |> cast(attrs, [:title, :body])
-    |> validate_required([:title, :body])
+    |> cast(attrs, [:title, :body, :views])
+    |> validate_required([:title, :body, :views])
   end
 end
