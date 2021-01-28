@@ -27,5 +27,4 @@ defmodule FooWeb.SessionController do
     |> configure_session(drop: true)
     |> redirect(to: "/")
   end
-
 end
